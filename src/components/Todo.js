@@ -1,14 +1,17 @@
-import React from "react";
+import * as React from "react";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useDispatch, useSelector } from "react-redux";
 import { todoreducers } from "../redux/reducers/reducer";
+import { REMOVE } from "../redux/actions/action";
 
 const Todo = () => {
+  const dispatch = useDispatch();
   const { User_data } = useSelector((state) => state.todoreducers);
-
-  console.log(User_data);
+  const remove = (id) => {
+    dispatch(REMOVE(id));
+  };
 
   return (
     <>
@@ -31,7 +34,10 @@ const Todo = () => {
                     <ModeEditIcon
                       style={{ color: "black", cursor: "pointer" }}
                     />
-                    <DeleteIcon style={{ color: "red", cursor: "pointer" }} />
+                    <DeleteIcon
+                      onClick={() => remove(k)}
+                      style={{ color: "red", cursor: "pointer" }}
+                    />
                     <RemoveRedEyeIcon
                       style={{ color: "gray", cursor: "pointer" }}
                     />
